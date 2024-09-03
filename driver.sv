@@ -54,9 +54,13 @@ class driver #(parameter width = 16);
                     end
 
                     lectoescritura: begin
-                        vif.push = 1;
-                        vif.pop = 1;
+                        transaction.dato = vif.dato_out;
                         transaction.tiempo = $time;
+                        @(posedge vif.clk);
+                            vif.push = 1;
+                            vif.pop = 1;
+                            drv_chkr_mbx.put(transaction);
+                            transaction.print("Driver: Transaccion ejecutada");
                     end
 
                     default: begin //agregar r&w

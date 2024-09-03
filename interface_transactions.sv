@@ -28,7 +28,7 @@ class trans_fifo #(parameter width = 16);
     endfunction
 
     function void print(string tag = "");
-        $display("[%g] %s Tiempo=%g Tipo=%s Retardo=%g dato=0x%h",$time,tag,tiempo,this.tipo,this.retardo,this.dato)
+        $display("[%g] %s Tiempo=%g Tipo=%s Retardo=%g dato=0x%h",$time,tag,tiempo,this.tipo,this.retardo,this.dato);
     endfunction
 
 endclass

@@ -79,6 +79,31 @@ class checker #(parameter width = 16, parameter depth = 8);
                     end
                 end
 
+                lectoescritura: begin
+                    if (emul_fifo.size() !== 0) begin //Si la fifo no esta vacia
+                        auxiliar = emul_fifo.pop_front(); //Sacar el primer dato
+                        if(transaccion.dato == auxiliar.dato) begin
+                           to_sb.dato_enviado = auxiliar.dato;
+                           to_sb.tiempo_push = auxiliar.tiempo;
+                           to_sb.tiempo_pop = transaccion.dato; //What?
+                           to_sb.completado = 1;
+                           to_sb.calc_latencia();
+                           to_sb.print("Checker:Transaccion Completada");
+                           chkr_sb_mbx.put(to_sb);
+                        end
+                    end
+
+                    else if(emul_fifo.size() == depth) begin //Si la fifo esta llena hay que generar overflow
+                        auxiliar = emul_fifo.pop_front();
+                        to_sb.dato_enviado = auxiliar.dato;
+                        to_sb.tiempo_push = auxiliar.tiempo;
+                        to_sb.overflow = 1;
+                        to_sb.print("Checker: Overflow");
+                        chkr_sb_mbx.put(to_sb);
+                        emul_fifo.push_back(transaccion);
+                    end
+                end
+
                 default: begin
                     $display("[%g] Checker Error: la transacción recibida no tiene tipo valido",$time);
                     $finish;

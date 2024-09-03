@@ -97,6 +97,13 @@ class checker #(parameter width = 16, parameter depth = 8);
                         emul_fifo.push_back(transaccion);
                     end
 
+                    else begin //Si no hay overflow ni underflow
+                        transaccion.print("Checker: Lectoescritura");
+                        emul_fifo.push_back(transaccion);
+                        auxiliar = emul_fifo.pop_front();
+                        
+                    end
+
                     //Revisar underflow, revisar overflow, checkear lectura, checkear escritura
                 end
 

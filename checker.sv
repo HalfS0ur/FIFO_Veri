@@ -80,20 +80,14 @@ class checker #(parameter width = 16, parameter depth = 8);
                 end
 
                 lectoescritura: begin
-                    if (emul_fifo.size() !== 0) begin //Si la fifo no esta vacia
-                        auxiliar = emul_fifo.pop_front(); //Sacar el primer dato
-                        if(transaccion.dato == auxiliar.dato) begin
-                           to_sb.dato_enviado = auxiliar.dato;
-                           to_sb.tiempo_push = auxiliar.tiempo;
-                           to_sb.tiempo_pop = transaccion.dato; //What?
-                           to_sb.completado = 1;
-                           to_sb.calc_latencia();
-                           to_sb.print("Checker:Transaccion Completada");
-                           chkr_sb_mbx.put(to_sb);
-                        end
+                    if (emul_fifo.size == 0) begin //Si el fifo esta vacio generar un underflow
+                        to_sb.tiempo_pop = transaccion.tiempo;
+                        to_sb.underflow = 1;
+                        to_sb.print("Checker: Underflow");
+                        chkr_sb_mbx.put(to_sb);
                     end
 
-                    else if(emul_fifo.size() == depth) begin //Si la fifo esta llena hay que generar overflow
+                    else if (emul_fifo.size() == depth) begin //Si la fifo esta llena generar un overflow
                         auxiliar = emul_fifo.pop_front();
                         to_sb.dato_enviado = auxiliar.dato;
                         to_sb.tiempo_push = auxiliar.tiempo;
@@ -102,6 +96,8 @@ class checker #(parameter width = 16, parameter depth = 8);
                         chkr_sb_mbx.put(to_sb);
                         emul_fifo.push_back(transaccion);
                     end
+
+                    //Revisar underflow, revisar overflow, checkear lectura, checkear escritura
                 end
 
                 default: begin

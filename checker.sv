@@ -13,7 +13,7 @@ class checker #(parameter width = 16, parameter depth = 8);
         this.contador_auxiliar = 0;
     endfunction
 
-    task run
+    task run();
         $display("[%g]  El checker fue inicializado",$time);
         to_sb = new();
         forever begin

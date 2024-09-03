@@ -53,6 +53,12 @@ class driver #(parameter width = 16);
                         transaction.print("Driver: Transaccion ejecutada");
                     end
 
+                    lectoescritura: begin
+                        vif.push = 1;
+                        vif.pop = 1;
+                        transaction.tiempo = $time;
+                    end
+
                     default: begin //agregar r&w
                         $display("[%g] Driver Error: la transacción recibida no tiene tipo valido",$time);
 	                    $finish;

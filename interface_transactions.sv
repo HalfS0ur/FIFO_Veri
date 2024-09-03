@@ -89,7 +89,7 @@ class trans_sb #(parameter width = 16); //Pq no tiene constructor?
 endclass
 
 //Estructura para generar comandos hacia el scoreboard
-typedef enum {retardo_primedio, reporte} solicitud_sb;
+typedef enum {retardo_promedio, reporte} solicitud_sb;
 
 //Estructura para generar comandos hacia el agente
 typedef enum {llenado_aleatorio, trans_aleatoria,trans_especifica, sec_trans_aleatorias} instrucciones_agente; //Meterle r&w

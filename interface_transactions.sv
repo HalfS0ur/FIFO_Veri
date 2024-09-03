@@ -1,5 +1,5 @@
 //Transacciones posibles en la FIFO
-typedef enum  { lectura, escritura, reset } tipo_trans; //Agregar r&w
+typedef enum  { lectura, escritura, reset, lectoescritura } tipo_trans; //Agregar r&w
 
 //Objeto para representar las transacciones que entran y salen de la FIFO
 class trans_fifo #(parameter width = 16);
@@ -92,7 +92,7 @@ endclass
 typedef enum {retardo_promedio, reporte} solicitud_sb;
 
 //Estructura para generar comandos hacia el agente
-typedef enum {llenado_aleatorio, trans_aleatoria,trans_especifica, sec_trans_aleatorias} instrucciones_agente; //Meterle r&w
+typedef enum {llenado_aleatorio, trans_aleatoria, trans_especifica, sec_trans_aleatorias} instrucciones_agente; //Meterle r&w
 
 //Mailboxes para comunicar las interfaces
 typedef mailbox #(trans_fifo) trans_fifo_mbx;

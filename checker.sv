@@ -1,5 +1,5 @@
 //Checker/scoreboard: Verifica que el comportamiento del DUT sea el esperado
-class checker #(parameter width = 16, parameter depth = 8)
+class checker #(parameter width = 16, parameter depth = 8);
     trans_fifo #(.width(width)) transaccion; //transaccion recibida en el mb
     trans_fifo #(.width(width)) auxiliar; //transaccion auxiliar para simular el fifo
     trans_sb   #(.width(width)) to_sb; //transaccion para comunicarse con el scoreboard

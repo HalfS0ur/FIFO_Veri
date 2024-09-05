@@ -82,7 +82,7 @@ task run;
         chkr_sb_mbx.put(to_sb);
         //Escribir en la FIFO simulada
         transaccion.print("Checker: Escribiendo en el FIFO");
-        emul_fifo.push_back(transaccion);
+        emul_fifo.insert(0, transaccion);
         //emul_fifo.pop_front(); //Like so
         $display("Estamos aqui mi gente", emul_fifo);
 

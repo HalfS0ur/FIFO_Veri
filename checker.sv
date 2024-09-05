@@ -123,9 +123,9 @@ task run;
         $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
         end
         //
-        
+
         //Como la fifo no esta vacia realizar la lectura normalmente
-        auxiliar = emul_fifo.pop_front();
+        auxiliar = emul_fifo.pop_back(); //Im onto something
         if(transaccion.dato == auxiliar.dato) begin
           to_sb.dato_enviado = auxiliar.dato;
           to_sb.tiempo_push = auxiliar.tiempo;

@@ -142,6 +142,11 @@ task run;
         
         //Como la fifo no esta vacia realizar la lectura normalmente
         auxiliar = emul_fifo.pop_front();
+
+        if (auxiliar.dato == 0) begin
+          auxiliar = emul_fifo.pop_front();
+        end
+
         if(transaccion.dato == auxiliar.dato) begin
           to_sb.dato_enviado = auxiliar.dato;
           to_sb.tiempo_push = auxiliar.tiempo;

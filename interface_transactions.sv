@@ -1,15 +1,18 @@
+//Transacciones posibles en la FIFO
+//--------------------------------//
 typedef enum { lectura, escritura, reset, lectoescritura} tipo_trans; 
 
+//Objeto para representar las transacciones que entran y salen de la FIFO
 class trans_fifo #(parameter width = 16);
-  rand int retardo; // tiempo de retardo en ciclos de reloj que se debe esperar antes de ejecutar la transacción
-  rand bit[width-1:0] dato; // este es el dato de la transacción
-  int tiempo; //Representa el tiempo  de la simulación en el que se ejecutó la transacción 
-  rand tipo_trans tipo; // lectura, escritura, reset;
-  int max_retardo;
+  rand int retardo; //Tiempo de retardo en ciclos de reloj aleatorizados
+  rand bit[width-1:0] dato; //Dato de la transaccion aleatorizado
+  int tiempo; //Tiempo en el que se ejecutó la transacción 
+  rand tipo_trans tipo; //lectura, escritura, reset;
+  int max_retardo; //Retardo maximo entre transacciones
  
-  constraint const_retardo {retardo < max_retardo; retardo>0;}
+  constraint const_retardo {retardo < max_retardo; retardo>0;} //Constraint para el retardo entre transacciones
 
-  function new(int ret =0,bit[width-1:0] dto=0,int tmp = 0, tipo_trans tpo = lectura, int mx_rtrd = 10);
+  function new(int ret =0,bit[width-1:0] dto=0,int tmp = 0, tipo_trans tpo = lectura, int mx_rtrd = 10); //Constructor de la clase trans_fifo
     this.retardo = ret;
     this.dato = dto;
     this.tiempo = tmp;
@@ -17,7 +20,7 @@ class trans_fifo #(parameter width = 16);
     this.max_retardo = mx_rtrd;
   endfunction
   
-  function clean;
+  function clean; //Limpieza de la clase
     this.retardo = 0;
     this.dato = 0;
     this.tiempo = 0;
@@ -30,6 +33,7 @@ class trans_fifo #(parameter width = 16);
   endfunction
 endclass
 
+//Interface para concectar el FIFO al testbench
 interface fifo_if #(parameter width =16) (
   input clk
 );
@@ -43,6 +47,7 @@ interface fifo_if #(parameter width =16) (
 
   endinterface
 
+//Objeto de transaccion que le voy a mandar al scoreboard
 class trans_sb #(parameter width=16);
   bit [width-1:0] dato_enviado;
   int tiempo_push;
@@ -83,10 +88,13 @@ class trans_sb #(parameter width=16);
   endfunction
 endclass
 
+//Estructura para generar comandos hacia el scoreboard
 typedef enum {retardo_promedio,reporte} solicitud_sb;
 
+//Estructura para generar comandos hacia el agente
 typedef enum {llenado_aleatorio,trans_aleatoria,trans_especifica,sec_trans_aleatorias} instrucciones_agente;
 
+//Mailboxes para comunicar las interfaces
 typedef mailbox #(trans_fifo) trans_fifo_mbx;
 
 typedef mailbox #(trans_sb) trans_sb_mbx;

@@ -87,6 +87,7 @@ task run;
       end
       //Si el fifo esta lleno generar un mensaje de overflow y leer un dato
       else if (emul_fifo.size() == depth) begin
+        $display("NOOOOOOOOOOOOOOOOO", emul_fifo);
         //Generar el mensaje de overflow
         auxiliar = emul_fifo.pop_front();
         to_sb.dato_enviado = auxiliar.dato;

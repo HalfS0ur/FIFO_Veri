@@ -1,5 +1,6 @@
-
-  class driver #(parameter width =16);
+//Driver y Monitor: Maneja la interaccion entre el ambiente y el FIFO
+//------------------------------------------------------------------//
+class driver #(parameter width =16);
   virtual fifo_if #(.width(width))vif;
   trans_fifo_mbx agnt_drv_mbx;
   trans_fifo_mbx drv_chkr_mbx;    
@@ -49,10 +50,10 @@
        drv_chkr_mbx.put(transaction); 
        transaction.print("Driver: Transaccion ejecutada");
      end
-     lectoescritura: begin
+     lectoescritura: begin //Caso de leer y escribir a la vez
        transaction.dato = vif.dato_out;
        transaction.tiempo = $time;
-       @(posedge vif.clk);
+       @(posedge vif.clk); //Hace push y pop en el mismo ciclo de reloj
         vif.push = 1;
         vif.pop = 1;
         drv_chkr_mbx.put(transaction);
@@ -63,7 +64,7 @@
       $finish;
     end 
   endcase    
-  @(posedge vif.clk);
+  @(posedge vif.clk); //Preguntar por esto
     end
   endtask
 endclass

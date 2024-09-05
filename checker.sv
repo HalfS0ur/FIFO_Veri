@@ -83,16 +83,16 @@ task run;
      lectoescritura: begin //SI esta vacio generar underflow y escribir, si esta lleno generar overflow y leer
       //Si el fifo esta vacio generar un mensaje de underflow y escribir un dato
       if (0 == emul_fifo.size()) begin
+        //Escribir en la FIFO simulada
+        transaccion.print("Checker: Escribiendo en el FIFO");
+        emul_fifo.push_back(transaccion);
+        $display("Estamos aqui mi gente", emul_fifo);
         //Generar el mensaje de underflow
         to_sb.tiempo_pop = transaccion.tiempo;
         to_sb.underflow = 1;
         to_sb.print("Checker: Underflow, se procede con la escritura");
         chkr_sb_mbx.put(to_sb);
-        //Escribir en la FIFO simulada
-        transaccion.print("Checker: Escribiendo en el FIFO");
-        emul_fifo.push_back(transaccion);
-        $display("Estamos aqui mi gente", emul_fifo);
-
+        
         //Prueba
         $display("FIFO Size: %0d", emul_fifo.size());
         foreach(emul_fifo[i]) begin

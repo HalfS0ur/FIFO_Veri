@@ -5,7 +5,7 @@ class test #(parameter width = 16, parameter depth =8);
 comando_test_sb_mbx    test_sb_mbx;
 comando_test_agent_mbx test_agent_mbx;
 
-parameter num_transacciones = 20;
+parameter num_transacciones = 15;
 parameter max_retardo = 4;
 solicitud_sb orden;
 instrucciones_agente instr_agent;

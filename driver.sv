@@ -54,7 +54,7 @@ class driver #(parameter width =16);
        transaction.dato = vif.dato_out;
        transaction.tiempo = $time;
        vif.push = 1;
-       @(posedge vif.clk); //Hace push y pop en el mismo ciclo de reloj
+       //@(posedge vif.clk); //Hace push y pop en el mismo ciclo de reloj
         //vif.push = 1;
         vif.pop = 1;
         drv_chkr_mbx.put(transaction);

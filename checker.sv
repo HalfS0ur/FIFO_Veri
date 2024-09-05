@@ -73,6 +73,7 @@ task run;
        end
      end
      lectoescritura: begin
+      $display(emul_fifo);
       if (emul_fifo.size == 0) begin //Si el fifo esta vacio generar un underflow
         to_sb.tiempo_pop = transaccion.tiempo;
         to_sb.underflow = 1;

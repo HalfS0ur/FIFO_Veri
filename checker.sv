@@ -86,6 +86,25 @@ task run;
         chkr_sb_mbx.put(to_sb);
         emul_fifo.push_back(transaccion);
       end
+      else begin
+        transaccion.print("Checker: Lectoescritura");
+        emul_fifo.push_back(transaccion);
+        auxiliar = emul_fifo.pop_front();
+        if (transaccion.dato == auxiliar.dato) begin
+          to_sb.dato_enviado = auxiliar.dato;
+          to_sb.tiempo_push = auxiliar.tiempo;
+          to_sb.tiempo_pop = transaccion.dato;
+          to_sb.completado = 1;
+          to_sb.calc_latencia();
+          to_sb.print("Checker: Lectoescritura completada");
+          chkr_sb_mbx.put(to_sb);
+        end
+        else begin
+          transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
+          $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
+          $finish;
+        end
+      end
     end
      default: begin
        $display("[%g] Checker Error: la transacción recibida no tiene tipo valido",$time);

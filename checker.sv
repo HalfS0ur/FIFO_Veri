@@ -48,7 +48,8 @@ task run;
      end
      escritura: begin
        if(emul_fifo.size() == depth)begin //Genera overflow si la fifo esta llena
-         auxiliar = emul_fifo.pop_front();
+         //auxiliar = emul_fifo.pop_front();
+         auxiliar = emul_fifo[0]; //revisar
          to_sb.dato_enviado = auxiliar.dato;
          to_sb.tiempo_push = auxiliar.tiempo;
          to_sb.overflow = 1;

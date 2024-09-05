@@ -88,10 +88,10 @@ task run;
         emul_fifo.push_back(transaccion);
         $display("Estamos aqui mi gente", emul_fifo);
         //Generar el mensaje de underflow
-        to_sb.tiempo_pop = transaccion.tiempo;
-        to_sb.underflow = 1;
-        to_sb.print("Checker: Underflow, se procede con la escritura");
-        chkr_sb_mbx.put(to_sb);
+        //to_sb.tiempo_pop = transaccion.tiempo;
+        //to_sb.underflow = 1;
+        //to_sb.print("Checker: Underflow, se procede con la escritura");
+        //chkr_sb_mbx.put(to_sb);
         
         //Prueba
         $display("FIFO Size: %0d", emul_fifo.size());

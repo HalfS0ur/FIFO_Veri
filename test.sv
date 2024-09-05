@@ -5,7 +5,7 @@ class test #(parameter width = 16, parameter depth =8);
 comando_test_sb_mbx    test_sb_mbx;
 comando_test_agent_mbx test_agent_mbx;
 
-parameter num_transacciones = 20;
+parameter num_transacciones = 10;
 parameter max_retardo = 4;
 solicitud_sb orden;
 instrucciones_agente instr_agent;
@@ -39,13 +39,13 @@ task run;
     ambiente_inst.run();
   join_none
   
-  //instr_agent = llenado_aleatorio;
-  //test_agent_mbx.put(instr_agent);
-  //$display("[%g]  Test: Enviada la primera instruccion al agente llenado aleatorio con num_transacciones %g",$time,num_transacciones);
+  instr_agent = llenado_aleatorio;
+  test_agent_mbx.put(instr_agent);
+  $display("[%g]  Test: Enviada la primera instruccion al agente llenado aleatorio con num_transacciones %g",$time,num_transacciones);
   
-  //instr_agent = trans_aleatoria;
-  //test_agent_mbx.put(instr_agent);
-  //$display("[%g]  Test: Enviada la segunda instruccion al agente transaccion_aleatoria",$time);
+  instr_agent = trans_aleatoria;
+  test_agent_mbx.put(instr_agent);
+  $display("[%g]  Test: Enviada la segunda instruccion al agente transaccion_aleatoria",$time);
   
   ambiente_inst.agent_inst.ret_spec = 3;
   ambiente_inst.agent_inst.tpo_spec = escritura;
@@ -54,9 +54,9 @@ task run;
   test_agent_mbx.put(instr_agent);
   $display("[%g]  Test: Enviada la tercera instruccion al agente transaccion_específica",$time);
 
-  //instr_agent = sec_trans_aleatorias;
-  //test_agent_mbx.put(instr_agent);
-  //$display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
+  instr_agent = sec_trans_aleatorias;
+  test_agent_mbx.put(instr_agent);
+  $display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
 
   ambiente_inst.agent_inst.ret_spec = 5;
   ambiente_inst.agent_inst.tpo_spec = lectoescritura;

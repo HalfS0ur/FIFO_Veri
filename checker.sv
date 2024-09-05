@@ -45,6 +45,14 @@ task run;
            to_sb.print("Checker: Underflow");
            chkr_sb_mbx.put(to_sb);
        end
+
+       //Prueba
+       $display("FIFO Size: %0d", emul_fifo.size());
+       foreach(emul_fifo[i]) begin
+       $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
+       end
+       //
+       
      end
      escritura: begin
        if(emul_fifo.size() == depth)begin //Genera overflow si la fifo esta llena

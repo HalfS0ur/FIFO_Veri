@@ -87,7 +87,6 @@ task run;
       end
       //Si el fifo esta lleno generar un mensaje de overflow y leer un dato
       else if (emul_fifo.size() == depth) begin
-        $display("NOOOOOOOOOOOOOOOOO", emul_fifo);
         //Generar el mensaje de overflow
         auxiliar = emul_fifo.pop_front();
         to_sb.dato_enviado = auxiliar.dato;
@@ -114,6 +113,7 @@ task run;
       end
       //Si no hay un overflow ni un underflow, continuar con la operacion "normal"
       else begin
+        $display("NOOOOOOOOOOOOOOOOO", emul_fifo);
         //Como la fifo no esta llena se mete el dato en la fifo simulada
         transaccion.print("Checker: Escritura");
         emul_fifo.push_back(transaccion);

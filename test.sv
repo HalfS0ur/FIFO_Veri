@@ -1,4 +1,5 @@
-
+//Modulo para correr la prueba
+//---------------------------//
 class test #(parameter width = 16, parameter depth =8); 
   
 comando_test_sb_mbx    test_sb_mbx;
@@ -10,16 +11,18 @@ solicitud_sb orden;
 instrucciones_agente instr_agent;
 solicitud_sb instr_sb;
  
-// Definición del ambiente 
+//Definición del ambiente 
 ambiente #(.depth(depth),.width(width)) ambiente_inst;
-// Definición de la interface 
+//Definición de la interfaz
 virtual fifo_if  #(.width(width)) _if;
 
 //definción de las condiciones iniciales del test
 function new; 
+  //Instancia mailboxes
   test_sb_mbx  = new();
   test_agent_mbx = new();
 
+  //Definicion y conexion del ambiente
   ambiente_inst = new();
   ambiente_inst._if = _if;    
   ambiente_inst.test_sb_mbx = test_sb_mbx;

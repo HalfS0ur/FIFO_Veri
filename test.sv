@@ -5,7 +5,7 @@ class test #(parameter width = 16, parameter depth =8);
 comando_test_sb_mbx    test_sb_mbx;
 comando_test_agent_mbx test_agent_mbx;
 
-parameter num_transacciones =10;
+parameter num_transacciones =50;
 parameter max_retardo = 4;
 solicitud_sb orden;
 instrucciones_agente instr_agent;
@@ -58,12 +58,12 @@ task run;
   test_agent_mbx.put(instr_agent);
   $display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
 
-  ambiente_inst.agent_inst.ret_spec = 5;
-  ambiente_inst.agent_inst.tpo_spec = lectoescritura;
-  ambiente_inst.agent_inst.dto_spec = {width/4{4'h7}};
-  instr_agent = sec_trans_especificas;
-  test_agent_mbx.put(instr_agent);
-  $display("[%g]  Test: Enviada la quinta instruccion al agente transaccion_específica",$time);
+  //ambiente_inst.agent_inst.ret_spec = 5;
+  //ambiente_inst.agent_inst.tpo_spec = lectoescritura;
+  //ambiente_inst.agent_inst.dto_spec = {width/4{4'h7}};
+  //instr_agent = sec_trans_especificas;
+  //test_agent_mbx.put(instr_agent);
+  //$display("[%g]  Test: Enviada la quinta instruccion al agente transaccion_específica",$time);
 
   #10000
   $display("[%g]  Test: Se alcanza el tiempo límite de la prueba",$time);

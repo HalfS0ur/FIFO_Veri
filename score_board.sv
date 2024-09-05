@@ -1,10 +1,11 @@
-
+//Scoreboard: Almacena el comportamiento de la prueba y genera reportes
+//--------------------------------------------------------------------//
 class score_board #(parameter width=16);
 trans_sb_mbx  chkr_sb_mbx;
 comando_test_sb_mbx test_sb_mbx;
 trans_sb #(.width(width))transaccion_entrante; 
-trans_sb scoreboard[$];  
-trans_sb auxiliar_array[$]; 
+trans_sb scoreboard[$];     //Estructura dinamica que maneja el scoreboard
+trans_sb auxiliar_array[$]; //Estructura auxiliar para explorar el scoreboard
 trans_sb auxiliar_trans;
 shortreal retardo_promedio;
 solicitud_sb orden;
@@ -16,16 +17,16 @@ task run;
   $display("[%g] El Score Board fue inicializado",$time);
   forever begin
     #5
-    if(chkr_sb_mbx.num()>0)begin
+    if(chkr_sb_mbx.num() > 0)begin //Si el mailbox no esta vacio
       chkr_sb_mbx.get(transaccion_entrante);
       transaccion_entrante.print("Score Board: transacción recibida desde el checker");
-      if(transaccion_entrante.completado) begin
+      if(transaccion_entrante.completado) begin //Cuando se completa la transaccion
         retardo_total = retardo_total + transaccion_entrante.latencia;
         transacciones_completadas++;
       end
       scoreboard.push_back(transaccion_entrante);
     end else begin
-      if(test_sb_mbx.num()>0)begin
+      if(test_sb_mbx.num() > 0)begin //Hmm
         test_sb_mbx.get(orden);
         case(orden)
           retardo_promedio: begin

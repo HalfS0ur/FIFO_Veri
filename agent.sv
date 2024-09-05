@@ -73,7 +73,7 @@ task run;
             transaccion = new;
             tpo_spec = lectoescritura;
             transaccion.tipo = tpo_spec;
-            transaccion.dato = i;
+            transaccion.dato = dto_spec;
             transaccion.retardo = ret_spec;
             transaccion.print("Agente: transacción creada");
             agnt_drv_mbx.put(transaccion);

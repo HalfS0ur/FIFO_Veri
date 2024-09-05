@@ -116,6 +116,14 @@ task run;
         //Como la fifo no esta llena se mete el dato en la fifo simulada
         transaccion.print("Checker: Escritura");
         emul_fifo.push_back(transaccion);
+
+        //Prueba
+        $display("FIFO Size: %0d", emul_fifo.size());
+        foreach(emul_fifo[i]) begin
+        $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
+        end
+        //
+        
         //Como la fifo no esta vacia realizar la lectura normalmente
         auxiliar = emul_fifo.pop_front();
         if(transaccion.dato == auxiliar.dato) begin

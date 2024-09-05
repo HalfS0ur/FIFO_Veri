@@ -153,7 +153,7 @@ task run;
         end else begin
           transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
          $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
-         //$finish; 
+         $finish; 
         end
       end
     end

@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+//Includes para no compilar los archivos uno por uno
 `include "fifo.sv"
 `include "interface_transactions.sv"
 `include "driver.sv"
@@ -8,6 +9,7 @@
 `include "ambiente.sv"
 `include "test.sv"
 
+//Modulo para correr la prueba
 module test_bench; 
   reg clk;
   parameter width = 16;

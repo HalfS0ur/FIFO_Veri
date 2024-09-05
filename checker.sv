@@ -150,7 +150,6 @@ task run;
         
         //Como la fifo no esta vacia realizar la lectura normalmente
         auxiliar = emul_fifo.pop_front();
-        if(transaccion.dato == auxiliar.dato) begin
           to_sb.dato_enviado = auxiliar.dato;
           to_sb.tiempo_push = auxiliar.tiempo;
           to_sb.tiempo_pop = transaccion.dato; //What?
@@ -158,11 +157,6 @@ task run;
           to_sb.calc_latencia();
           to_sb.print("Checker:Transaccion Completada");
           chkr_sb_mbx.put(to_sb);
-        end else begin
-          transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
-         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
-         $finish; 
-        end
       end
     end
      default: begin

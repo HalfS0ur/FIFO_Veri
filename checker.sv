@@ -1,6 +1,6 @@
 //Checker y scoreboard: Verifica que el comportamiento del DUT sea el esperado
 //---------------------------------------------------------------------------//
-class checker #(parameter width=16, parameter depth =8);
+class checker #(parameter width = 16, parameter depth = 8);
 trans_fifo #(.width(width)) transaccion; //transaccion recibida en el mb
 trans_fifo #(.width(width)) auxiliar; //tansaccion auxiliar para simular el fifo
 trans_sb   #(.width(width)) to_sb; //transaccion para comunicarse con el scoreboard
@@ -86,7 +86,7 @@ task run;
       $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
       end
       //
-      
+
      end
      lectoescritura: begin //SI esta vacio generar underflow y escribir, si esta lleno generar overflow y leer
       //Si el fifo esta vacio generar un mensaje de underflow y escribir un dato

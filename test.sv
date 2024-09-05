@@ -55,7 +55,7 @@ class test #(parameter width = 16, parameter depth = 8);
         test_agent_mbx.put(instr_agent);
         $display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
 
-        #10000
+        #100 //#10000
         $display("[%g]  Test: Se alcanza el tiempo límite de la prueba",$time);
         instr_sb = retardo_promedio;
         test_sb_mbx.put(instr_sb);

@@ -5,6 +5,7 @@ comando_test_sb_mbx test_sb_mbx;
 trans_sb #(.width(width))transaccion_entrante; 
 trans_sb scoreboard[$];  
 trans_sb auxiliar_array[$]; 
+trans_sb auxiliar_trans;
 shortreal retardo_promedio;
 solicitud_sb orden;
 int tamano_sb = 0;

@@ -39,7 +39,7 @@ function new(); //Super constructor de todo
   scoreboard_inst.chkr_sb_mbx = chkr_sb_mbx;
   scoreboard_inst.test_sb_mbx = test_sb_mbx;
   agent_inst.test_agent_mbx   = test_agent_mbx;
-  agent_inst.agnt_drv_mbx = agnt_drv_mbx;
+  agent_inst.agnt_drv_mbx     = agnt_drv_mbx;
 endfunction
 
 virtual task run();

@@ -53,9 +53,9 @@ class driver #(parameter width =16);
      lectoescritura: begin //Caso de leer y escribir a la vez
        transaction.dato = vif.dato_out;
        transaction.tiempo = $time;
-       //vif.push = 1;
+       vif.push = 1;
        @(posedge vif.clk); //Hace push y pop en el mismo ciclo de reloj
-        vif.push = 1;
+        //vif.push = 1;
         vif.pop = 1;
         drv_chkr_mbx.put(transaction);
         transaction.print("Driver: Transaccion lectoescritura ejecutada");

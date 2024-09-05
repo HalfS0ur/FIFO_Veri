@@ -70,6 +70,23 @@ task run;
          chkr_sb_mbx.put(to_sb);
        end
      end
+     lectoescritura: begin
+      if (emul_fifo.size == 0) begin
+        to_sb.tiempo_pop = transaccion.tiempo;
+        to_sb.underflow = 1;
+        to_sb.print("Checker: Underflow");
+        chkr_sb_mbx.put(to_sb);
+      end
+      else if (emul_fifo.size() == depth) begin
+        auxiliar = emul_fifo.pop_front();
+        to_sb.dato_enviado = auxiliar.dato;
+        to_sb.tiempo_push = auxiliar.tiempo;
+        to_sb.overflow = 1;
+        to_sb.print("Checker: Overflow");
+        chkr_sb_mbx.put(to_sb);
+        emul_fifo.push_back(transaccion);
+      end
+    end
      default: begin
        $display("[%g] Checker Error: la transacción recibida no tiene tipo valido",$time);
        $finish;

@@ -128,7 +128,7 @@ task run;
           chkr_sb_mbx.put(to_sb);
         end else begin
           transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
-         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,emul_fifo[0]);
+         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
          $finish; 
         end
       end

@@ -68,6 +68,16 @@ task run;
           agnt_drv_mbx.put(transaccion);
           end
         end
+        sec_trans_especificas: begin
+          for (int i = 0; i < num_transacciones; i++)begin
+            transaccion = new;
+            transaccion.tipo = tpo_spec;
+            transaccion.dato = dto_spec;
+            transaccion.retardo = ret_spec;
+            transaccion.print("Agente: transacción creada");
+            agnt_drv_mbx.put(transaccion);
+          end
+        end
       endcase
     end
   end

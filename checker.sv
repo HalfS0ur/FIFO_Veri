@@ -113,7 +113,6 @@ task run;
       end
       //Si no hay un overflow ni un underflow, continuar con la operacion "normal"
       else begin
-        $display("NOOOOOOOOOOOOOOOOO", emul_fifo);
         //Como la fifo no esta llena se mete el dato en la fifo simulada
         transaccion.print("Checker: Escritura");
         emul_fifo.push_back(transaccion);
@@ -129,7 +128,7 @@ task run;
           chkr_sb_mbx.put(to_sb);
         end else begin
           transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
-         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
+         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,emul_fifo[0]);
          $finish; 
         end
       end

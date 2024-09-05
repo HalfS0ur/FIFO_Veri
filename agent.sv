@@ -71,6 +71,7 @@ task run;
         sec_trans_especificas: begin
           for (int i = 0; i < num_transacciones; i++)begin
             transaccion = new;
+            tpo_spec = lectoescritura;
             transaccion.tipo = tpo_spec;
             transaccion.dato = dto_spec;
             transaccion.retardo = ret_spec;

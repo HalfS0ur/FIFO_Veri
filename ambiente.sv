@@ -1,34 +1,36 @@
+//Ambiente: Conecta todos los modulos del ambiente para que sean usados por el test
+//--------------------------------------------------------------------------------//
 class ambiente #(parameter width =16, parameter depth = 8);
-// Componentes del ambiente
+// Declara los componentes del ambiente
 driver #(.width(width)) driver_inst;
 checker #(.width(width),.depth(depth)) checker_inst;
 score_board #(.width(width)) scoreboard_inst;
 agent #(.width(width),.depth(depth)) agent_inst;
 
-// Interface que conecta el DUT 
+// Declara la interfaz
 virtual fifo_if  #(.width(width)) _if;
 
-//declaración de los mailboxes
-trans_fifo_mbx agnt_drv_mbx;           //mailbox del agente al driver
-trans_fifo_mbx drv_chkr_mbx;           //mailbox del driver al checher
-trans_sb_mbx chkr_sb_mbx;              //mailbox del checker al scoreboard
-comando_test_sb_mbx test_sb_mbx;       //mailbox del test al scoreboard
-comando_test_agent_mbx test_agent_mbx; //mailbox del test al agente
+//Declaración de los mailboxes
+trans_fifo_mbx agnt_drv_mbx;           //Mailbox del agente al driver
+trans_fifo_mbx drv_chkr_mbx;           //Mailbox del driver al checher
+trans_sb_mbx chkr_sb_mbx;              //Mailbox del checker al scoreboard
+comando_test_sb_mbx test_sb_mbx;       //Mailbox del test al scoreboard
+comando_test_agent_mbx test_agent_mbx; //Mailbox del test al agente
 
-function new();
-  // Instanciación de los mailboxes
+function new(); //Super constructor de todo
+  //Instanciación de los mailboxes
   drv_chkr_mbx   = new();
   agnt_drv_mbx   = new();
   chkr_sb_mbx    = new();
   test_sb_mbx    = new();
   test_agent_mbx = new();
 
-  // instanciación de los componentes del ambiente
+  //Instanciación de los componentes del ambiente
   driver_inst     = new();
   checker_inst    = new();
   scoreboard_inst = new();
   agent_inst      = new();
-  // conexiones
+  //Conexion de las interfaces y mailboxes en el ambiente
   driver_inst.vif             = _if;
   driver_inst.drv_chkr_mbx    = drv_chkr_mbx;
   driver_inst.agnt_drv_mbx    = agnt_drv_mbx;

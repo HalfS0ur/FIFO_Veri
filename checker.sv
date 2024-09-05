@@ -76,13 +76,39 @@ task run;
       //Si el fifo esta vacio generar un mensaje de underflow y escribir un dato
       if (0 == emul_fifo.size()) begin
         //Generar el mensaje de underflow
-        //to_sb.tiempo_pop = transaccion.tiempo;
+        to_sb.tiempo_pop = transaccion.tiempo; //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         to_sb.underflow = 1;
         to_sb.print("Checker: Underflow, se procede con la escritura");
         chkr_sb_mbx.put(to_sb);
         //Escribir en la FIFO simulada
         transaccion.print("Checker: Escribiendo en el FIFO");
         emul_fifo.push_back(transaccion);
+      end
+      //Si el fifo esta lleno generar un mensaje de overflow y leer un dato
+      else if (emul_fifo.size() == depth) begin
+        //Generar el mensaje de overflow
+        auxiliar = emul_fifo.pop_front();
+        to_sb.dato_enviado = auxiliar.dato;
+        to_sb.tiempo_push = auxiliar.tiempo;
+        to_sb.overflow = 1;
+        to_sb.print("Checker: Overflow, se procede con la lectura");
+        chkr_sb_mbs.put(to_sb);
+        emul_fifo.push_back(transaccion);
+        //Leer el dato
+        auxiliar = emul_fifo.pop_front();
+         if(transaccion.dato == auxiliar.dato) begin
+           to_sb.dato_enviado = auxiliar.dato;
+           to_sb.tiempo_push = auxiliar.tiempo;
+           to_sb.tiempo_pop = transaccion.dato; //What?
+           to_sb.completado = 1;
+           to_sb.calc_latencia();
+           to_sb.print("Checker:Transaccion Completada");
+           chkr_sb_mbx.put(to_sb);
+         end else begin
+           transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
+          $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
+          $finish; 
+         end
       end
       //Si no hay un overflow ni un underflow, continuar con la operacion "normal"
       else begin

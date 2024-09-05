@@ -92,7 +92,7 @@ task run;
         to_sb.tiempo_push = auxiliar.tiempo;
         to_sb.overflow = 1;
         to_sb.print("Checker: Overflow, se procede con la lectura");
-        chkr_sb_mbs.put(to_sb);
+        chkr_sb_mbx.put(to_sb);
         emul_fifo.push_back(transaccion);
         //Leer el dato
         auxiliar = emul_fifo.pop_front();

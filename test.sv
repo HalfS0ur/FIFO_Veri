@@ -58,6 +58,15 @@ task run;
   test_agent_mbx.put(instr_agent);
   $display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
 
+  for(int i = 0; i < num_transacciones; i++) begin
+    ambiente_inst.agent_inst.ret_spec = 5;
+    ambiente_inst.agent_inst.tpo_spec = lectoescritura;
+    ambiente_inst.agent_inst.dto_spec = {width/4{4'h5}};
+    instr_agent = trans_especifica;
+    test_agent_mbx.put(instr_agent);
+    $display("[%g]  Test: Enviada la quinta instruccion al agente transaccion_específica",$time);
+  end
+
   #10000
   $display("[%g]  Test: Se alcanza el tiempo límite de la prueba",$time);
   instr_sb = retardo_promedio;

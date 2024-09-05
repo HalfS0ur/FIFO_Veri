@@ -122,11 +122,6 @@ class checker #(parameter width = 16, parameter depth = 8);
 
                     //Revisar underflow, revisar overflow, checkear lectura, checkear escritura
                 end
-
-                default: begin
-                    $display("[%g] Checker Error: la transacción recibida no tiene tipo valido",$time);
-                    $finish;
-                end 
             endcase
         end
     endtask

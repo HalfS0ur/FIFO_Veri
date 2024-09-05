@@ -54,7 +54,7 @@ task run;
         trans_especifica: begin //Ejecuta una transaccion especifica  
           transaccion = new;
           transaccion.tipo = escritura;
-          transaccion.dato = dto_spec;
+          transaccion.dato = {width/4{4'h1234}};
           transaccion.retardo = ret_spec;
           transaccion.print("Agente: transacción creada");
           agnt_drv_mbx.put(transaccion);

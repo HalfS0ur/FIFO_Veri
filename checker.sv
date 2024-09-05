@@ -31,7 +31,7 @@ task run;
       $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
       end
       //
-      
+
        if(0 !== emul_fifo.size()) begin //Revisa si el Fifo no está vacía
          auxiliar = emul_fifo.pop_front();
          if(transaccion.dato == auxiliar.dato) begin
@@ -90,7 +90,7 @@ task run;
         chkr_sb_mbx.put(to_sb);
         //Escribir en la FIFO simulada
         transaccion.print("Checker: Escribiendo en el FIFO");
-        emul_fifo.push_front(transaccion);
+        emul_fifo = {transaccion};
         $display("Estamos aqui mi gente", emul_fifo);
 
         //Prueba

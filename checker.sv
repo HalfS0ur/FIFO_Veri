@@ -83,6 +83,7 @@ task run;
         //Escribir en la FIFO simulada
         transaccion.print("Checker: Escribiendo en el FIFO");
         emul_fifo.push_back(transaccion);
+        $display("Estamos aqui mi gente");
       end
       //Si el fifo esta lleno generar un mensaje de overflow y leer un dato
       else if (emul_fifo.size() == depth) begin

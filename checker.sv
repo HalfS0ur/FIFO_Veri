@@ -76,7 +76,7 @@ task run;
       //Si el fifo esta vacio generar un mensaje de underflow y escribir un dato
       if (0 == emul_fifo.size()) begin
         //Generar el mensaje de underflow
-        to_sb.tiempo_pop = transaccion.tiempo; //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        to_sb.tiempo_pop = transaccion.tiempo;
         to_sb.underflow = 1;
         to_sb.print("Checker: Underflow, se procede con la escritura");
         chkr_sb_mbx.put(to_sb);
@@ -85,6 +85,14 @@ task run;
         emul_fifo.push_back(transaccion);
         emul_fifo.pop_front(); //Like so
         $display("Estamos aqui mi gente", emul_fifo);
+
+        //Prueba
+        $display("FIFO Size: %0d", emul_fifo.size());
+        foreach(emul_fifo[i]) begin
+        $display("FIFO Element %0d: %h", i, emul_fifo[i].dato);
+        end
+        //
+        
       end
       //Si el fifo esta lleno generar un mensaje de overflow y leer un dato
       else if (emul_fifo.size() == depth) begin

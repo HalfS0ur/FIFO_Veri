@@ -80,6 +80,8 @@ task run;
         to_sb.underflow = 1;
         to_sb.print("Checker: Underflow");
         chkr_sb_mbx.put(to_sb);
+        transaccion.print("Checker: Escritura");
+        emul_fifo.push_back(transaccion);
       end
       else if (emul_fifo.size() == depth) begin //Si el fifo esta lleno generar un overflow
         auxiliar = emul_fifo.pop_front();

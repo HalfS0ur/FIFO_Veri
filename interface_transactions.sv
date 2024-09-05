@@ -1,6 +1,6 @@
 //Transacciones posibles en la FIFO
 //--------------------------------//
-typedef enum {lectura, escritura, reset, lectoescritura} tipo_trans; 
+typedef enum { lectura, escritura, reset, lectoescritura} tipo_trans; 
 
 //Objeto para representar las transacciones que entran y salen de la FIFO
 class trans_fifo #(parameter width = 16);

@@ -58,33 +58,12 @@ task run;
   //test_agent_mbx.put(instr_agent);
   //$display("[%g]  Test: Enviada la cuarta instruccion al agente secuencia %g de transaccion_aleatoria",$time,num_transacciones);
 
-  //ambiente_inst.agent_inst.ret_spec = 5;
-  //ambiente_inst.agent_inst.tpo_spec = lectoescritura;
-  //ambiente_inst.agent_inst.dto_spec = {width/4{4'h7}};
-  //instr_agent = sec_trans_especificas;
-  //test_agent_mbx.put(instr_agent);
-  //$display("[%g]  Test: Enviada la quinta instruccion al agente transaccion_específica",$time);
-
-  ambiente_inst.agent_inst.ret_spec = 3;
-  ambiente_inst.agent_inst.tpo_spec = reset;
-  ambiente_inst.agent_inst.dto_spec = {width/4{4'h5}};
-  instr_agent = trans_especifica;
-  test_agent_mbx.put(instr_agent);
-  $display("[%g]  Test: Enviada la tercera instruccion al agente transaccion_específica",$time);
-
-  ambiente_inst.agent_inst.ret_spec = 3;
+  ambiente_inst.agent_inst.ret_spec = 5;
   ambiente_inst.agent_inst.tpo_spec = lectoescritura;
-  ambiente_inst.agent_inst.dto_spec = {width/4{4'h5}};
-  instr_agent = trans_especifica;
+  ambiente_inst.agent_inst.dto_spec = {width/4{4'h7}};
+  instr_agent = sec_trans_especificas;
   test_agent_mbx.put(instr_agent);
-  $display("[%g]  Test: Enviada la tercera instruccion al agente transaccion_específica",$time);
-
-  ambiente_inst.agent_inst.ret_spec = 3;
-  ambiente_inst.agent_inst.tpo_spec = lectura;
-  ambiente_inst.agent_inst.dto_spec = {width/4{4'h5}};
-  instr_agent = trans_especifica;
-  test_agent_mbx.put(instr_agent);
-  $display("[%g]  Test: Enviada la tercera instruccion al agente transaccion_específica",$time);
+  $display("[%g]  Test: Enviada la quinta instruccion al agente transaccion_específica",$time);
 
   #10000
   $display("[%g]  Test: Se alcanza el tiempo límite de la prueba",$time);

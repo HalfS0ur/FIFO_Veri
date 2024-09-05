@@ -76,7 +76,7 @@ task run;
       //Si el fifo esta vacio generar un mensaje de underflow y escribir un dato
       if (0 == emul_fifo.size()) begin
         //Generar el mensaje de underflow
-        to_sb.tiempo_pop = transaccion.tiempo;
+        //to_sb.tiempo_pop = transaccion.tiempo;
         to_sb.underflow = 1;
         to_sb.print("Checker: Underflow, se procede con la escritura");
         chkr_sb_mbx.put(to_sb);

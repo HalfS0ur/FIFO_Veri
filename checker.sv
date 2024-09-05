@@ -84,6 +84,27 @@ task run;
         transaccion.print("Checker: Escribiendo en el FIFO");
         emul_fifo.push_back(transaccion);
       end
+      //Si no hay un overflow ni un underflow, continuar con la operacion "normal"
+      else begin
+        //Como la fifo no esta llena se mete el dato en la fifo simulada
+        transaccion.print("Checker: Escritura");
+        emul_fifo.push_back(transaccion);
+        //Como la fifo no esta vacia realizar la lectura normalmente
+        auxiliar = emul_fifo.pop_front();
+        if(transaccion.dato == auxiliar.dato) begin
+          to_sb.dato_enviado = auxiliar.dato;
+          to_sb.tiempo_push = auxiliar.tiempo;
+          to_sb.tiempo_pop = transaccion.dato; //What?
+          to_sb.completado = 1;
+          to_sb.calc_latencia();
+          to_sb.print("Checker:Transaccion Completada");
+          chkr_sb_mbx.put(to_sb);
+        end else begin
+          transaccion.print("Checker: Error el dato de la transacción no calza con el esperado");
+         $display("Dato_leido= %h, Dato_Esperado = %h",transaccion.dato,auxiliar.dato);
+         $finish; 
+        end
+      end
     end
      default: begin
        $display("[%g] Checker Error: la transacción recibida no tiene tipo valido",$time);
